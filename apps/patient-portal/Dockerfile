@@ -9,6 +9,8 @@ COPY packages/ ./packages/
 RUN pnpm install --frozen-lockfile
 
 FROM base AS builder
+ARG NEXT_PUBLIC_MEDPLUM_BASE_URL=http://localhost:8103/
+ENV NEXT_PUBLIC_MEDPLUM_BASE_URL=$NEXT_PUBLIC_MEDPLUM_BASE_URL
 WORKDIR /app
 COPY --from=deps /app/ ./
 COPY apps/patient-portal/ ./apps/patient-portal/

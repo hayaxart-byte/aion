@@ -1,0 +1,18 @@
+{
+  "baseUrl": "https://medplum-production-2946.up.railway.app",
+  "port": 8103,
+  "database": {
+    "host": "postgres.railway.internal",
+    "port": 5432,
+    "dbname": "railway",
+    "username": "postgres",
+    "password": "eNZUCrzwQVMBPJxmPMbkSYVhHhYChrFU",
+    "ssl": { "rejectUnauthorized": false }
+  },
+  "redis": {
+    "host": "redis.railway.internal",
+    "port": 6379,
+    "password": "uUjxCjeYEPrDvmzZrolJmZTHQrHgvjHQ"
+  },
+  "emailProvider": "none"
+}
