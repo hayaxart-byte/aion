@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "backend-latency-profiler-helper": {
+      "source": "patricio0312rev/skills",
+      "sourceType": "github",
+      "skillPath": "performance/backend-latency-profiler-helper/SKILL.md",
+      "computedHash": "6356da0045d543f5c9a97bee33eaa672f0879277dedaa28cc99b89bfbb3bdd23"
+    },
+    "browser-to-api": {
+      "source": "browserbase/skills",
+      "sourceType": "github",
+      "skillPath": "skills/browser-to-api/SKILL.md",
+      "computedHash": "75e30d7af3fbb6b0d885f5072d934d8e8f76394145a7236bec88191f0c0cf11e"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
+    },
+    "latency-critical-systems": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/latency-critical-systems/SKILL.md",
+      "computedHash": "dbad9023795049357dc4008b6bda0cd7b3b7a54274031fb609952b55c1af04ac"
+    },
+    "playwright-skill": {
+      "source": "testdino-hq/playwright-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "96f555933416cd7f3bad397810523b79a7020ff3e338eb115027f2230e5c4d4c"
+    },
+    "web-quality-audit": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-quality-audit/SKILL.md",
+      "computedHash": "48e90790e9269d46c6471bbc61d109db05bdc2ef834734dff21c039880934e9b"
+    }
+  }
+}

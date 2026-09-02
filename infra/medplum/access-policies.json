@@ -1,0 +1,51 @@
+{
+  "doctor-policy": {
+    "resourceType": "AccessPolicy",
+    "name": "Doctor Policy — Acceso completo a pacientes, citas y encuentros",
+    "description": "Política para médicos, recepcionistas y enfermería. Permite lectura y escritura en los recursos clínicos principales.",
+    "resource": [
+      { "resourceType": "Patient", "read": true, "write": true },
+      { "resourceType": "Appointment", "read": true, "write": true },
+      { "resourceType": "Encounter", "read": true, "write": true },
+      { "resourceType": "Practitioner", "read": true, "write": false },
+      { "resourceType": "Observation", "read": true, "write": true },
+      { "resourceType": "DiagnosticReport", "read": true, "write": true },
+      { "resourceType": "MedicationRequest", "read": true, "write": true },
+      { "resourceType": "CarePlan", "read": true, "write": true }
+    ]
+  },
+  "patient-policy": {
+    "resourceType": "AccessPolicy",
+    "name": "Patient Policy — Acceso a datos propios",
+    "description": "Política para pacientes. Solo puede leer su propio perfil y gestionar sus citas. No puede ver datos de otros pacientes.",
+    "resource": [
+      { "resourceType": "Patient", "read": true, "write": false },
+      { "resourceType": "Appointment", "read": true, "write": true },
+      { "resourceType": "Encounter", "read": false, "write": false },
+      { "resourceType": "Practitioner", "read": true, "write": false },
+      { "resourceType": "Observation", "read": true, "write": false },
+      { "resourceType": "DiagnosticReport", "read": true, "write": false },
+      { "resourceType": "MedicationRequest", "read": true, "write": false }
+    ],
+    "compartment": {
+      "usePatientCompartment": true
+    }
+  },
+  "admin-policy": {
+    "resourceType": "AccessPolicy",
+    "name": "Admin Policy — Acceso total",
+    "description": "Política para administradores. Acceso completo a todos los recursos del proyecto.",
+    "resource": [
+      { "resourceType": "Patient", "read": true, "write": true },
+      { "resourceType": "Appointment", "read": true, "write": true },
+      { "resourceType": "Encounter", "read": true, "write": true },
+      { "resourceType": "Practitioner", "read": true, "write": true },
+      { "resourceType": "Observation", "read": true, "write": true },
+      { "resourceType": "DiagnosticReport", "read": true, "write": true },
+      { "resourceType": "MedicationRequest", "read": true, "write": true },
+      { "resourceType": "CarePlan", "read": true, "write": true },
+      { "resourceType": "Organization", "read": true, "write": true },
+      { "resourceType": "ProjectMembership", "read": true, "write": true }
+    ]
+  }
+}
