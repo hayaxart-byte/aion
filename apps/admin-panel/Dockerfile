@@ -22,7 +22,7 @@ ENV NODE_ENV=production
 ENV PORT=3001
 ENV HOSTNAME="0.0.0.0"
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
-COPY --from=builder --chown=nextjs:nodejs /app/apps/admin-panel/public ./apps/admin-panel/public
+RUN mkdir -p ./apps/admin-panel/public
 COPY --from=builder --chown=nextjs:nodejs /app/apps/admin-panel/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/admin-panel/.next/static ./apps/admin-panel/.next/static
 USER nextjs
