@@ -28,3 +28,4 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/admin-panel/.next/static ./a
 USER nextjs
 EXPOSE 3001
 CMD ["node", "apps/admin-panel/server.js"]
+# force rebuild
