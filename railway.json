@@ -1,3 +1,39 @@
 {
-  "$schema": "https://railway.com/railway.schema.json"
+  "$schema": "https://railway.com/railway.schema.json",
+  "services": {
+    "admin-panel": {
+      "source": {
+        "repo": "hayaxart-byte/aion",
+        "branch": "main"
+      },
+      "rootDirectory": "apps/admin-panel",
+      "dockerfilePath": "apps/admin-panel/Dockerfile",
+      "healthcheckPath": "/api/health",
+      "healthcheckTimeout": 300,
+      "restartPolicyType": "ON_FAILURE",
+      "restartPolicyMaxRetries": 10
+    },
+    "doctor-dashboard": {
+      "source": {
+        "repo": "hayaxart-byte/aion",
+        "branch": "main"
+      },
+      "rootDirectory": "apps/doctor-dashboard",
+      "dockerfilePath": "apps/doctor-dashboard/Dockerfile",
+      "healthcheckPath": "/api/health",
+      "healthcheckTimeout": 300,
+      "restartPolicyType": "ON_FAILURE",
+      "restartPolicyMaxRetries": 10
+    },
+    "medplum": {
+      "source": {
+        "repo": "hayaxart-byte/aion",
+        "branch": "main"
+      },
+      "rootDirectory": ".",
+      "dockerfilePath": "Dockerfile.medplum",
+      "restartPolicyType": "ON_FAILURE",
+      "restartPolicyMaxRetries": 10
+    }
+  }
 }
