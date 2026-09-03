@@ -10,7 +10,7 @@ export async function login(
   const loginResponse = await client.startLogin({
     email,
     password,
-    clientId: 'b3597a3f-b9b4-4450-8cab-a08ee329520d',
+    clientId: '8fea6f91-d2dc-4892-975c-948bb4d47c6c',
     scope: 'openid offline_access',
   });
   if (loginResponse.code) {
