@@ -43,6 +43,7 @@ export function AuthProvider({
 }) {
   const [client] = useState(() => new MedplumClient({
     baseUrl: getMedplumBaseUrl(),
+    clientId: process.env.NEXT_PUBLIC_MEDPLUM_CLIENT_ID,
     storagePrefix,
   }));
   const [user, setUser] = useState<User | null>(null);
