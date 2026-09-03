@@ -44,6 +44,7 @@ export function AuthProvider({
   const [client] = useState(() => new MedplumClient({
     baseUrl: getMedplumBaseUrl(),
     clientId: 'b3597a3f-b9b4-4450-8cab-a08ee329520d',
+    tokenUrl: 'api/oauth2/token',
     storagePrefix,
   }));
   const [user, setUser] = useState<User | null>(null);
