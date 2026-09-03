@@ -1,4 +1,5 @@
 FROM node:22-alpine AS base
+ARG BUILD_ID=1
 RUN corepack enable && corepack prepare pnpm@11.6.0 --activate
 
 FROM base AS deps
