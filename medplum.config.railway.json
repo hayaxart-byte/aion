@@ -1,9 +1,7 @@
 {
-  "baseUrl": "https://medplum-production-8816.up.railway.app",
+  "appBaseUrl": "https://medplum-production-8816.up.railway.app",
   "port": 8103,
-  "allowedOrigins": [
-    "https://doctor-dashboard-production-27c7.up.railway.app"
-  ],
+  "allowedOrigins": "*",
   "database": {
     "host": "postgres.railway.internal",
     "port": 5432,
