@@ -1,4 +1,5 @@
 {
+  "baseUrl": "https://medplum-production-8816.up.railway.app",
   "appBaseUrl": "https://medplum-production-8816.up.railway.app",
   "port": 8103,
   "allowedOrigins": "*",
