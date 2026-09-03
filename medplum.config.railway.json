@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://medplum-production-2946.up.railway.app",
+  "baseUrl": "https://medplum-production-8816.up.railway.app",
   "port": 8103,
   "database": {
     "host": "postgres.railway.internal",
