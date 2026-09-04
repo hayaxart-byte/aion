@@ -11,6 +11,7 @@ export async function login(
     email,
     password,
     clientId: '8fea6f91-d2dc-4892-975c-948bb4d47c6c',
+    projectId: 'dd3366a9-4f1c-4c31-a6e7-e34eef272f40',
     scope: 'openid offline_access',
   });
   if (loginResponse.code) {
