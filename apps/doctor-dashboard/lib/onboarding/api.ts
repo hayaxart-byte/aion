@@ -44,7 +44,7 @@ export async function searchLocations(query: string): Promise<GeocodingResult[]>
   if (!query.trim() || query.trim().length < 2) return [];
   try {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&addressdetails=1`,
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&addressdetails=1&countrycodes=nic`,
       { headers: { 'Accept-Language': 'es' } }
     );
     if (!res.ok) return [];
