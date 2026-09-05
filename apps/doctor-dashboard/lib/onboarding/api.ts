@@ -40,28 +40,36 @@ export interface GeocodingResult {
   displayName: string;
 }
 
+async function fetchNominatim(q: string): Promise<GeocodingResult[]> {
+  const res = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&limit=10&addressdetails=1`,
+    { headers: { 'Accept-Language': 'es' } }
+  );
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data
+    .filter((item: Record<string, unknown>) => {
+      const addr = item.address as Record<string, unknown> | undefined;
+      const country = (addr?.country as string) ?? '';
+      const displayName = (item.display_name as string) ?? '';
+      return country === 'Nicaragua' || displayName.includes('Nicaragua');
+    })
+    .slice(0, 5)
+    .map((item: Record<string, unknown>) => ({
+      lat: parseFloat(item.lat as string),
+      lng: parseFloat(item.lon as string),
+      displayName: item.display_name as string,
+    }));
+}
+
 export async function searchLocations(query: string): Promise<GeocodingResult[]> {
   if (!query.trim() || query.trim().length < 2) return [];
   try {
-    const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=10&addressdetails=1`,
-      { headers: { 'Accept-Language': 'es' } }
-    );
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data
-      .filter((item: Record<string, unknown>) => {
-        const addr = item.address as Record<string, unknown> | undefined;
-        const country = (addr?.country as string) ?? '';
-        const displayName = (item.display_name as string) ?? '';
-        return country === 'Nicaragua' || displayName.includes('Nicaragua');
-      })
-      .slice(0, 5)
-      .map((item: Record<string, unknown>) => ({
-        lat: parseFloat(item.lat as string),
-        lng: parseFloat(item.lon as string),
-        displayName: item.display_name as string,
-      }));
+    let results = await fetchNominatim(query);
+    if (results.length === 0 && !query.toLowerCase().includes('nicaragua')) {
+      results = await fetchNominatim(query + ', Nicaragua');
+    }
+    return results;
   } catch {
     return [];
   }
