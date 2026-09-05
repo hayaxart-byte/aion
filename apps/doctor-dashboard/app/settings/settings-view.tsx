@@ -120,7 +120,7 @@ export default function SettingsView() {
             <CardDescription>Define el horario de atención</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label>Hora de inicio</Label>
                 <Select value={settings.agenda.startHour} onChange={(e) => updateAgenda({ startHour: Number(e.target.value) })}>

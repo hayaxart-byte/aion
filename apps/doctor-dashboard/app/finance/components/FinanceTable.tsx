@@ -69,14 +69,14 @@ export function FinanceTable({ transactions, loading, tab, onRowClick, onAction 
   }
 
   const columns = [
-    { key: 'date', label: 'Fecha', sortable: true, align: '' as const },
-    { key: 'patient', label: PATIENT_LABEL[tab], sortable: true, align: '' as const },
-    { key: 'doctor', label: 'Doctor', sortable: true, align: '' as const },
-    { key: 'cashier', label: 'Cajero', sortable: true, align: '' as const },
-    { key: 'billed', label: 'Facturado', sortable: false, align: 'right' as const },
-    { key: 'paid', label: 'Pagado', sortable: false, align: 'right' as const },
-    { key: 'balance', label: 'Saldo', sortable: false, align: 'right' as const },
-    { key: 'status', label: 'Estado', sortable: false, align: '' as const },
+    { key: 'date', label: 'Fecha', sortable: true, align: '' as const, className: '' },
+    { key: 'patient', label: PATIENT_LABEL[tab], sortable: true, align: '' as const, className: '' },
+    { key: 'doctor', label: 'Doctor', sortable: true, align: '' as const, className: 'hidden lg:table-cell' },
+    { key: 'cashier', label: 'Cajero', sortable: true, align: '' as const, className: 'hidden xl:table-cell' },
+    { key: 'billed', label: 'Facturado', sortable: false, align: 'right' as const, className: '' },
+    { key: 'paid', label: 'Pagado', sortable: false, align: 'right' as const, className: 'hidden sm:table-cell' },
+    { key: 'balance', label: 'Saldo', sortable: false, align: 'right' as const, className: '' },
+    { key: 'status', label: 'Estado', sortable: false, align: '' as const, className: 'hidden md:table-cell' },
   ];
 
   return (
@@ -87,7 +87,7 @@ export function FinanceTable({ transactions, loading, tab, onRowClick, onAction 
             {columns.map((col) => (
               <TableHead
                 key={col.key}
-                className={cn(col.align === 'right' && 'text-right', col.sortable && 'cursor-pointer hover:bg-muted/50')}
+                className={cn(col.align === 'right' && 'text-right', col.sortable && 'cursor-pointer hover:bg-muted/50', col.className)}
                 onClick={() => col.sortable && handleSort(col.key)}
               >
                 <div className={cn('flex items-center gap-1', col.align === 'right' && 'justify-end')}>
@@ -109,16 +109,16 @@ export function FinanceTable({ transactions, loading, tab, onRowClick, onAction 
                 <div className="font-medium text-foreground">{t.patient}</div>
                 {(tab === 'expenses' || tab === 'payables') && <div className="text-xs text-muted-foreground">Proveedor</div>}
               </TableCell>
-              <TableCell className="text-sm text-muted-foreground">{t.doctor}</TableCell>
-              <TableCell className="text-sm text-muted-foreground">{t.cashier}</TableCell>
+              <TableCell className="text-sm text-muted-foreground hidden lg:table-cell">{t.doctor}</TableCell>
+              <TableCell className="text-sm text-muted-foreground hidden xl:table-cell">{t.cashier}</TableCell>
               <TableCell className="text-sm text-right font-medium text-foreground">${t.billed.toFixed(2)}</TableCell>
-              <TableCell className="text-sm text-right font-medium text-green-600">${t.paid.toFixed(2)}</TableCell>
+              <TableCell className="text-sm text-right font-medium text-green-600 hidden sm:table-cell">${t.paid.toFixed(2)}</TableCell>
               <TableCell className="text-sm text-right font-medium">
                 <span className={cn(t.balance > 0 ? 'text-destructive' : 'text-muted-foreground')}>
                   ${t.balance.toFixed(2)}
                 </span>
               </TableCell>
-              <TableCell>
+              <TableCell className="hidden md:table-cell">
                 <Badge className={cn('text-xs', STATUS_COLORS[t.status])}>{STATUS_LABELS[t.status]}</Badge>
               </TableCell>
               <TableCell className="text-right">

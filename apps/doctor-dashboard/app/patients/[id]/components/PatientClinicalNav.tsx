@@ -55,73 +55,106 @@ export function PatientClinicalNav({
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div
-      className={cn(
-        'h-full border-r border-border/50 bg-white flex flex-col transition-all duration-300 shrink-0',
-        collapsed ? 'w-16' : 'w-56'
-      )}
-    >
-      <div
-        className={cn(
-          'p-3 space-y-2 border-b border-border/50',
-          collapsed && 'flex flex-col items-center'
-        )}
-      >
-        <button
-          onClick={onNewAppointment}
-          className={cn(
-            'w-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 rounded-xl text-sm font-medium transition-colors',
-            collapsed ? 'h-10 w-10 p-0' : 'h-9 px-4'
-          )}
-          title="Crear cita"
-        >
-          <Plus className="h-4 w-4" />
-          {!collapsed && 'Crear cita'}
-        </button>
+    <>
+      {/* Mobile: horizontal scrollable nav */}
+      <div className="md:hidden border-b border-border/50 bg-white">
+        <nav className="flex overflow-x-auto gap-1 px-3 py-2 scrollbar-thin" aria-label="Secciones del paciente">
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeSection === item.id;
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.id}
+                onClick={() => onSectionChange(item.id)}
+                className={cn(
+                  'flex items-center gap-2 px-3 py-2 text-xs font-medium whitespace-nowrap rounded-lg transition-colors shrink-0',
+                  isActive
+                    ? 'bg-blue-50 text-blue-600'
+                    : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
+                )}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                <span>{item.label}</span>
+                {item.id === 'allergies' && allergiesCount !== undefined && allergiesCount > 0 && (
+                  <span className="bg-red-100 text-red-700 text-[9px] font-medium px-1.5 py-0.5 rounded-full">
+                    {allergiesCount}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </nav>
       </div>
 
-      <nav className="flex-1 overflow-y-auto py-2 scrollbar-thin">
-        {NAV_ITEMS.map((item) => {
-          const isActive = activeSection === item.id;
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.id}
-              onClick={() => onSectionChange(item.id)}
-              className={cn(
-                'w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-all',
-                'hover:bg-blue-50 hover:text-blue-600',
-                isActive
-                  ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600 font-medium'
-                  : 'text-gray-600'
-              )}
-              title={collapsed ? item.label : undefined}
-            >
-              <Icon
-                className={cn(
-                  'h-4 w-4 shrink-0',
-                  isActive ? 'text-blue-600' : 'text-gray-400'
-                )}
-              />
-              {!collapsed && (
-                <span className="flex-1 text-left truncate">{item.label}</span>
-              )}
-              {!collapsed && item.id === 'allergies' && allergiesCount !== undefined && allergiesCount > 0 && (
-                <span className="bg-red-100 text-red-700 text-[10px] font-medium px-2 py-0.5 rounded-full">
-                  {allergiesCount}
-                </span>
-              )}
-            </button>
-          );
-        })}
-      </nav>
-
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="flex items-center justify-center h-8 border-t border-border/50 text-gray-400 hover:text-gray-600 transition-colors"
+      {/* Tablet/Desktop: sidebar nav */}
+      <div
+        className={cn(
+          'hidden md:flex h-full border-r border-border/50 bg-white flex-col transition-all duration-300 shrink-0',
+          collapsed ? 'w-16' : 'w-56'
+        )}
       >
-        {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-      </button>
-    </div>
+        <div
+          className={cn(
+            'p-3 space-y-2 border-b border-border/50',
+            collapsed && 'flex flex-col items-center'
+          )}
+        >
+          <button
+            onClick={onNewAppointment}
+            className={cn(
+              'w-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 rounded-xl text-sm font-medium transition-colors',
+              collapsed ? 'h-10 w-10 p-0' : 'h-9 px-4'
+            )}
+            title="Crear cita"
+          >
+            <Plus className="h-4 w-4" />
+            {!collapsed && 'Crear cita'}
+          </button>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto py-2 scrollbar-thin">
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeSection === item.id;
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.id}
+                onClick={() => onSectionChange(item.id)}
+                className={cn(
+                  'w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-all',
+                  'hover:bg-blue-50 hover:text-blue-600',
+                  isActive
+                    ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600 font-medium'
+                    : 'text-gray-600'
+                )}
+                title={collapsed ? item.label : undefined}
+              >
+                <Icon
+                  className={cn(
+                    'h-4 w-4 shrink-0',
+                    isActive ? 'text-blue-600' : 'text-gray-400'
+                  )}
+                />
+                {!collapsed && (
+                  <span className="flex-1 text-left truncate">{item.label}</span>
+                )}
+                {!collapsed && item.id === 'allergies' && allergiesCount !== undefined && allergiesCount > 0 && (
+                  <span className="bg-red-100 text-red-700 text-[10px] font-medium px-2 py-0.5 rounded-full">
+                    {allergiesCount}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </nav>
+
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="flex items-center justify-center h-8 border-t border-border/50 text-gray-400 hover:text-gray-600 transition-colors"
+        >
+          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+        </button>
+      </div>
+    </>
   );
 }

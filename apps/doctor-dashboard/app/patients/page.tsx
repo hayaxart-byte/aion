@@ -29,7 +29,7 @@ export default function PatientsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Pacientes</h1>
           <p className="text-sm text-muted-foreground mt-1">Lista de pacientes registrados</p>
@@ -44,7 +44,7 @@ export default function PatientsPage() {
       </div>
 
       <div className="bg-card rounded-2xl shadow-sm border border-border/50 p-5">
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <div className="flex-1">
             <PatientSearchBar value={search} onChange={setSearch} />
           </div>

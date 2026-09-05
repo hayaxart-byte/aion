@@ -61,7 +61,7 @@ export function MedicalDataGrid({
       <div
         className={cn(
           'grid gap-0.5',
-          columns === 2 ? 'grid-cols-2' : 'grid-cols-3'
+          columns === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
         )}
       >
         {items.map((item, index) => (

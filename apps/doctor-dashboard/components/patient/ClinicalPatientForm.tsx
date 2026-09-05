@@ -283,7 +283,7 @@ function FhirFieldInput({
 function HumanNameInputLocal({ value, onChange }: { value: any; onChange: (v: any) => void }) {
   const name = value?.[0] ?? {};
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <div>
         <label className="text-xs text-muted-foreground">Nombres</label>
         <Input
@@ -323,7 +323,7 @@ function ContactPointInput({ value, onChange }: { value: any; onChange: (v: any)
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <div>
         <label className="text-xs text-muted-foreground">Teléfono</label>
         <Input
@@ -364,7 +364,7 @@ function AddressInputLocal({ value, onChange }: { value: any; onChange: (v: any)
           placeholder="Calle y número"
         />
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
           <label className="text-xs text-muted-foreground">Ciudad</label>
           <Input
