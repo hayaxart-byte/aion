@@ -170,6 +170,11 @@ export default function MapPage() {
 
 function formatDisplayName(name: string): string {
   const parts = name.split(',').map((p) => p.trim());
-  if (parts.length <= 2) return name;
+  if (parts.length <= 1) return name;
+  const last = parts[parts.length - 1];
+  const isCountry = /^(Nicaragua|Honduras|Guatemala|Costa Rica|El Salvador|Panamá|Estados Unidos|Argentina|México|España|Colombia|Perú|Chile|Brasil)$/i.test(last);
+  if (isCountry) {
+    return parts.slice(-2).join(', ');
+  }
   return parts.slice(0, 3).join(', ');
 }
