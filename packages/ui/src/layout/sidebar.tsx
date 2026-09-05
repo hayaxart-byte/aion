@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { X } from 'lucide-react';
 import { cn } from '../utils';
 
 export interface NavItem {
@@ -44,7 +45,21 @@ function Sidebar({ navItems, open, onClose }: SidebarProps) {
           open !== undefined && !open && 'max-md:-translate-x-full'
         )}
       >
-        <nav className="space-y-2 px-4 pt-6" aria-label="Navegación principal">
+        {/* Mobile close button */}
+        {onClose && (
+          <div className="flex items-center justify-end p-2 md:hidden">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              aria-label="Cerrar menú"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+
+        <nav className="space-y-2 px-4 pt-2 md:pt-6" aria-label="Navegación principal">
           {navItems.map((item) => {
             const active = isActive(item);
             return (
