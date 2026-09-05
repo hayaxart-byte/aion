@@ -34,6 +34,31 @@ export async function verifyOtpCode(phone: string, code: string): Promise<{ succ
   throw new Error('OTP por teléfono/WhatsApp fue reemplazado por verificación por email');
 }
 
+export interface GeocodingResult {
+  lat: number;
+  lng: number;
+  displayName: string;
+}
+
+export async function searchLocations(query: string): Promise<GeocodingResult[]> {
+  if (!query.trim() || query.trim().length < 2) return [];
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&addressdetails=1`,
+      { headers: { 'Accept-Language': 'es' } }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.map((item: Record<string, unknown>) => ({
+      lat: parseFloat(item.lat as string),
+      lng: parseFloat(item.lon as string),
+      displayName: item.display_name as string,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export async function geocodeAddress(address: string): Promise<{ lat: number; lng: number } | null> {
   try {
     const res = await fetch(
