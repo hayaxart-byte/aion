@@ -174,7 +174,9 @@ function formatDisplayName(name: string): string {
   const last = parts[parts.length - 1];
   const isCountry = /^(Nicaragua|Honduras|Guatemala|Costa Rica|El Salvador|Panamá|Estados Unidos|Argentina|México|España|Colombia|Perú|Chile|Brasil)$/i.test(last);
   if (isCountry) {
-    return parts.slice(-2).join(', ');
+    const city = parts[0];
+    if (city === last) return name;
+    return city + ', ' + last;
   }
   return parts.slice(0, 3).join(', ');
 }
