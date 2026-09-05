@@ -44,16 +44,24 @@ export async function searchLocations(query: string): Promise<GeocodingResult[]>
   if (!query.trim() || query.trim().length < 2) return [];
   try {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&addressdetails=1&countrycodes=nic`,
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=10&addressdetails=1&countrycodes=nic`,
       { headers: { 'Accept-Language': 'es' } }
     );
     if (!res.ok) return [];
     const data = await res.json();
-    return data.map((item: Record<string, unknown>) => ({
-      lat: parseFloat(item.lat as string),
-      lng: parseFloat(item.lon as string),
-      displayName: item.display_name as string,
-    }));
+    return data
+      .filter((item: Record<string, unknown>) => {
+        const addr = item.address as Record<string, unknown> | undefined;
+        const country = (addr?.country as string) ?? '';
+        const displayName = (item.display_name as string) ?? '';
+        return country === 'Nicaragua' || displayName.includes('Nicaragua');
+      })
+      .slice(0, 5)
+      .map((item: Record<string, unknown>) => ({
+        lat: parseFloat(item.lat as string),
+        lng: parseFloat(item.lon as string),
+        displayName: item.display_name as string,
+      }));
   } catch {
     return [];
   }
