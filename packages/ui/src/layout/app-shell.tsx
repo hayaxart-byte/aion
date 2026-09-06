@@ -39,7 +39,7 @@ function AppShell({
         <header className="flex h-16 w-full shrink-0 items-center justify-between border-b border-border bg-white px-4 md:px-6">
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground md:pointer-events-none md:invisible"
             onClick={() => setSidebarOpen(true)}
             aria-label="Abrir menú"
           >
