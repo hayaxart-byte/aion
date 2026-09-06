@@ -45,7 +45,6 @@ function AppShell({
           >
             <Menu className="h-5 w-5" />
           </button>
-          <div className="md:hidden" />
           <UserDropdown
             userName={userName}
             userRole={userRole}
