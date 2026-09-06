@@ -96,7 +96,7 @@ export default function MapPage() {
           </div>
         </div>
 
-        <div ref={containerRef} className="relative">
+        <div ref={containerRef} className="relative z-10">
           <div className="flex gap-2">
             <div className="relative flex-1">
               <Input
